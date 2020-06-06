@@ -4,20 +4,21 @@ jobs:
     build:
         docker:
             - image: "debian:stretch"
-    steps:
-        - run:
-            name: Updating
-            command: apt-get update
-        - run:
-            name: Installing tools
-            command: apt-get install -y gcc g++ cmake ninja-build git openssh-client
-        - checkout
-        - run:
-            name: Install Submodules
-            command: git submodule sync && git submodule update --init
-        - run:
-            name: Build
-            command: make tests
-        - run:
-            name: Unit tests
-            command: make run_tests
+
+        steps:
+            - run:
+                name: Updating
+                command: apt-get update
+            - run:
+                name: Installing tools
+                command: apt-get install -y gcc g++ cmake ninja-build git openssh-client
+            - checkout
+            - run:
+                name: Install Submodules
+                command: git submodule sync && git submodule update --init
+            - run:
+                name: Build
+                command: make tests
+            - run:
+                name: Unit tests
+                command: make run_tests
