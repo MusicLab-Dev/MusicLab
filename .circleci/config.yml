@@ -5,16 +5,16 @@ jobs:
     docker:
       - image: "debian:stretch"
     steps:
-      - checkout
       - run:
           name: Updating
           command: apt-get update
       - run:
           name: Installing tools
           command: apt-get install -y gcc g++ cmake ninja-build git openssh-client
-      - run:
-          name: Pulling
-          command: git submodule update --init
+    - checkout
+    - run:
+        name: Install Submodules
+        command: git submodule sync && git submodule update --init
       - run:
           name: Build
           command: make tests
