@@ -1,0 +1,18 @@
+[submodule "MLAudio"]
+	path = MLAudio
+	url = git@github.com:MusicLab-Dev/MLAudio.git
+[submodule "MLStudio"]
+	path = MLStudio
+	url = git@github.com:MusicLab-Dev/MLStudio.git
+[submodule "MLCore"]
+	path = MLCore
+	url = git@github.com:MusicLab-Dev/MLCore.git
+[submodule "MLProtocol"]
+	path = MLProtocol
+	url = git@github.com:MusicLab-Dev/MLProtocol.git
+[submodule "MLBoard"]
+	path = MLBoard
+	url = git@github.com:MusicLab-Dev/MLBoard.git
+[submodule "MLModules"]
+	path = MLModules
+	url = git@github.com:MusicLab-Dev/MLModules.git
