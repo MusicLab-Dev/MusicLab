@@ -13,8 +13,8 @@ all: release
 
 build:
 	cmake -E make_directory $(BUILD_DIR)
-	cmake -B $(BUILD_DIR) -H. -DCMAKE_BUILD_TYPE=$(BUILD_TYPE) ${CMAKE_ARGS} -GNinja
-	cmake --build $(BUILD_DIR)
+	cmake -B ./$(BUILD_DIR) -H. -DCMAKE_BUILD_TYPE=$(BUILD_TYPE) ${CMAKE_ARGS} -GNinja
+	cmake --build ./$(BUILD_DIR)
 
 release:
 	$(MAKE) build BUILD_DIR=$(RELEASE_DIR) BUILD_TYPE=Release
