@@ -14,7 +14,7 @@ jobs:
                 command: apt-get install -y gcc g++ cmake ninja-build git openssh-client
             - checkout
             - run:
-                name: Install Submodules
+                name: Pulling submodules
                 command: git submodule sync && git submodule update --init
             - run:
                 name: Build
