@@ -12,6 +12,7 @@ jobs:
             - run:
                 name: Installing tools
                 command: |
+                    apt-get install -y wget gcc g++ ninja-build git openssh-client
                     wget https://cmake.org/files/v3.10/cmake-3.10.2-Linux-x86_64.tar.gz
                     tar -xvzf cmake-3.10.2-Linux-x86_64.tar.gz
                     chmod +x ./cmake-3.10.2-Linux-x86_64/bin/ccmake
@@ -23,7 +24,6 @@ jobs:
                     ln -s $DIR/cmake-3.10.2-Linux-x86_64/bin/cmake /usr/bin/cmake
                     ln -s $DIR/cmake-3.10.2-Linux-x86_64/bin/cpack /usr/bin/cpack
                     ln -s $DIR/cmake-3.10.2-Linux-x86_64/bin/ctest /usr/bin/ctest
-                    apt-get install -y gcc g++ ninja-build git openssh-client
             - checkout
             - run:
                 name: Pulling submodules
