@@ -4,13 +4,16 @@ project(MusicLab)
 get_filename_component(MLRootDir ${CMAKE_CURRENT_LIST_FILE} PATH)
 
 if (NOT DEFINED ML_TESTS)
-    set(ML_TESTS FALSE)
+set(ML_TESTS FALSE)
 elseif (${ML_TESTS})
+    find_package(GTest REQUIRED)
     enable_testing()
 endif ()
 
 if (NOT DEFINED ML_BENCHMARKS)
     set(ML_BENCHMARKS FALSE)
+elseif (${ML_BENCHMARKS})
+    find_package(benchmark REQUIRED)
 endif ()
 
 if (NOT DEFINED ML_CORE)

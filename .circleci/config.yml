@@ -10,7 +10,7 @@ jobs:
                 command: sudo apt-get update
             - run:
                 name: Installing tools
-                command: sudo apt-get install -y gcc g++ cmake ninja-build git openssh-client libgtest-dev
+                command: sudo apt-get install -y gcc g++ cmake ninja-build libgtest-dev
             - checkout
             - run:
                 name: Pulling submodules
