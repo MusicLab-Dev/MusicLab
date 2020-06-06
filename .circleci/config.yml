@@ -7,14 +7,14 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Pulling
-          command: git submodule update --init
-      - run:
           name: Updating
           command: apt-get update
       - run:
-          name: Installing GCC and tools
-          command: apt-get install -y gcc g++ cmake ninja-build
+          name: Installing tools
+          command: apt-get install -y gcc g++ cmake ninja-build git openssh-client
+      - run:
+          name: Pulling
+          command: git submodule update --init
       - run:
           name: Build
           command: make tests
