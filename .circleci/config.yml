@@ -2,6 +2,9 @@ version: 2.1
 
 jobs:
     build:
+        machine:
+            image: ubuntu-1604:201903-01
+        resource_class: small
         docker:
             - image: "debian:stretch"
 
@@ -11,19 +14,7 @@ jobs:
                 command: apt-get update
             - run:
                 name: Installing tools
-                command: |
-                    apt-get install -y wget gcc g++ ninja-build git openssh-client
-                    wget https://cmake.org/files/v3.10/cmake-3.10.2-Linux-x86_64.tar.gz
-                    tar -xvzf cmake-3.10.2-Linux-x86_64.tar.gz
-                    chmod +x ./cmake-3.10.2-Linux-x86_64/bin/ccmake
-                    chmod +x ./cmake-3.10.2-Linux-x86_64/bin/cmake
-                    chmod +x ./cmake-3.10.2-Linux-x86_64/bin/cpack
-                    chmod +x ./cmake-3.10.2-Linux-x86_64/bin/ctest
-                    DIR=$(pwd)
-                    ln -s $DIR/cmake-3.10.2-Linux-x86_64/bin/ccmake /usr/bin/ccmake
-                    ln -s $DIR/cmake-3.10.2-Linux-x86_64/bin/cmake /usr/bin/cmake
-                    ln -s $DIR/cmake-3.10.2-Linux-x86_64/bin/cpack /usr/bin/cpack
-                    ln -s $DIR/cmake-3.10.2-Linux-x86_64/bin/ctest /usr/bin/ctest
+                command: apt-get install -y gcc g++ cmake ninja-build git openssh-client
             - checkout
             - run:
                 name: Pulling submodules
