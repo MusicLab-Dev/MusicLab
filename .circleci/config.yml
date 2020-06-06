@@ -10,11 +10,8 @@ jobs:
           name: Updating
           command: apt-get update
       - run:
-          name: Installing GCC
-          command: apt-get install -y gcc g++
-      - run:
-          name: Install CMAKE
-          command: apt-get install -y cmake
+          name: Installing GCC and tools
+          command: apt-get install -y gcc g++ cmake ninja
       - run:
           name: Build
           command: make tests
