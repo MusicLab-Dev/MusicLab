@@ -8,19 +8,16 @@ jobs:
       - checkout
       - run:
           name: Updating
-          command: 'apt-get update'
+          command: apt-get update
       - run:
           name: Installing GCC
-          command: 'apt-get update && apt-get install -y gcc g++'
-      - run:
-          name: Install MAKE
-          command: 'apt-get update && sudo apt-get install -y make'
+          command: apt-get install -y gcc g++
       - run:
           name: Install CMAKE
-          command: 'apt-get update && sudo apt-get install -y cmake'
+          command: sudo apt-get install -y cmake
       - run:
           name: Build
-          command: 'make tests'
+          command: make tests
       - run:
           name: Unit tests
-          command: 'make run_tests'
+          command: make run_tests
