@@ -10,7 +10,11 @@ jobs:
                 command: sudo apt-get update
             - run:
                 name: Installing tools
-                command: sudo apt-get install -y gcc g++ cmake ninja-build libgtest-dev
+                command: |
+                    sudo apt-get install -y gcc g++ cmake ninja-build libgtest-dev
+                    cd /usr/src/gtest
+                    sudo cmake CMakeLists.txt
+                    sudo cmake --build . --target install
             - checkout
             - run:
                 name: Pulling submodules
