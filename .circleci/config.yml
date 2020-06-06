@@ -17,7 +17,9 @@ jobs:
                 command: git submodule sync && git submodule update --init
             - run:
                 name: Build
-                command: make tests
+                command: |
+                    cmake . -DCMAKE_BUILD_TYPE=Release -DML_TESTS=TRUE -GNinja
+                    cmake --build .
             - run:
-                name: Unit tests
-                command: make run_tests
+                name: Run tests
+                command: ninja test
