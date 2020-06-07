@@ -5,6 +5,7 @@ These rules can be seen very stricts but after using them for a while you will e
 **Explicit must be your main mental keyword**
 
 # Global naming
+* Use 4 space for 1 tab
 * You must use **camelCase** notation for everything, please watch below the uppercase rule of each function
 * All files must starts with an **uppercase**
 * All header files must have the **.hpp** extension, sources the **.cpp** and header extensions the **.ipp**
