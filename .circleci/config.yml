@@ -1,0 +1,29 @@
+version: 2.1
+
+jobs:
+    build:
+        docker:
+            - image: cimg/base:2020.01
+        steps:
+            - run:
+                name: Updating
+                command: sudo apt-get update
+            - run:
+                name: Installing tools
+                command: |
+                    sudo apt-get install -y gcc g++ cmake ninja-build libgtest-dev
+                    cd /usr/src/gtest
+                    sudo cmake CMakeLists.txt
+                    sudo cmake --build . --target install
+            - checkout
+            - run:
+                name: Pulling submodules
+                command: git submodule sync && git submodule update --init
+            - run:
+                name: Build
+                command: |
+                    cmake . -DCMAKE_BUILD_TYPE=Release -DML_TESTS=TRUE -GNinja
+                    cmake --build .
+            - run:
+                name: Run tests
+                command: ninja test
