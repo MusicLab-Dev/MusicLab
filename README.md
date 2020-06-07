@@ -17,3 +17,6 @@ The software team maintain **MLStudio** module, which is the main controller sof
 
 ## Hardware
 The hardware team maintain **MLBoard** and **MLModules** modules, which are the embeded controller of inputs.
+
+## Dev ops
+The dev ops team maintain **MusicLab** repository's and its CI pipeline.
