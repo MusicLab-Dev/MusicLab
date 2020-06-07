@@ -1,1 +1,1 @@
-[![CircleCI](https://circleci.com/github/MusicLab-Dev/MusicLab.svg?style=svg&circle-token=07ecb6b43eaf20bd0dc6d1a8674efb3865cd5fc6)](<LINK>)
+[![MusicLab-Dev](https://circleci.com/gh/MusicLab-Dev/MusicLab.svg?style=svg&circle-token=0d83218b4178c066e4993aa4982f49e6582bc286)](https://app.circleci.com/pipelines/gh/MusicLab-Dev/MusicLab/)
