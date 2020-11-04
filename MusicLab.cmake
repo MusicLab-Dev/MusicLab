@@ -3,68 +3,74 @@ project(MusicLab)
 
 get_filename_component(MLRootDir ${CMAKE_CURRENT_LIST_FILE} PATH)
 
-if (NOT DEFINED ML_TESTS)
-set(ML_TESTS FALSE)
-elseif (${ML_TESTS})
+include(${MLRootDir}/CompileOptions.cmake)
+
+set(AtLeastOneManualTag FALSE)
+
+function(ml_setup_module Tag Hint)
+    set(${Tag}_PATH "${MLRootDir}/${Hint}/${Hint}.cmake" PARENT_SCOPE)
+    set(${Tag}_COMPILED FALSE PARENT_SCOPE)
+    if(NOT DEFINED ${Tag})
+        message("${Tag} is not manually specified")
+        set(${Tag} FALSE PARENT_SCOPE)
+    else()
+        message("${Tag} is manually specified to ${${Tag}}")
+        set(AtLeastOneManualTag TRUE PARENT_SCOPE)
+    endif()
+endfunction()
+
+function(ml_include_module Tag)
+    if(${Tag}_COMPILED) # Already compiled
+        return()
+    elseif(NOT ${AtLeastOneManualTag}) ## All modules must be compiled
+        set(${Tag}_COMPILED TRUE PARENT_SCOPE)
+        message("-> Including module ${Tag}")
+        include(${${Tag}_PATH})
+    elseif(${Tag}) # If module is manually specified to be compiled
+        set(${Tag}_COMPILED TRUE PARENT_SCOPE)
+        message("-> Including module ${Tag}")
+        foreach(Dependency ${ARGN})
+            set(${Dependency} TRUE)
+            ml_include_module(${Dependency})
+        endforeach()
+        include(${${Tag}_PATH})
+    endif()
+endfunction()
+
+if(NOT DEFINED ML_TESTS)
+    set(ML_TESTS FALSE)
+elseif(${ML_TESTS})
     find_package(GTest REQUIRED)
     enable_testing()
-endif ()
+endif()
 
-if (NOT DEFINED ML_BENCHMARKS)
+if(NOT DEFINED ML_BENCHMARKS)
     set(ML_BENCHMARKS FALSE)
-elseif (${ML_BENCHMARKS})
+elseif(${ML_BENCHMARKS})
     find_package(benchmark REQUIRED)
-endif ()
+endif()
 
-if (NOT DEFINED ML_CORE)
-    set(ML_CORE FALSE)
-endif ()
+ml_setup_module(ML_CORE MLCore)
+ml_setup_module(ML_AUDIO MLAudio)
+ml_setup_module(ML_STUDIO MLStudio)
+ml_setup_module(ML_BOARD MLBoard)
+ml_setup_module(ML_PROTOCOL MLProtocol)
 
-if (NOT DEFINED ML_AUDIO)
-    set(ML_AUDIO FALSE)
-endif ()
+ml_include_module(ML_CORE)
 
-if (NOT DEFINED ML_PROTOCOL)
-    set(ML_PROTOCOL FALSE)
-endif ()
+ml_include_module(ML_PROTOCOL)
 
-if (NOT DEFINED ML_STUDIO)
-    set(ML_STUDIO FALSE)
-endif ()
+ml_include_module(ML_AUDIO
+# Dependencies
+    ML_CORE
+)
 
-if (NOT DEFINED ML_BOARD)
-    set(ML_BOARD FALSE)
-endif ()
+ml_include_module(ML_BOARD
+# Dependencies
+    ML_CORE
+)
 
-if (NOT DEFINED ML_MODULES)
-    set(ML_MODULES FALSE)
-endif ()
-
-if (NOT ${ML_AUDIO} AND NOT ${ML_BOARD} AND NOT ${ML_STUDIO} AND NOT ${ML_MODULES})
-    set(ML_ALL TRUE)
-else ()
-    set(ML_ALL FALSE)
-endif ()
-
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED 17)
-
-if (${ML_ALL} OR ${ML_CORE})
-    include(${MLRootDir}/MLCore/MLCore.cmake)
-endif ()
-
-if (${ML_ALL} OR ${ML_AUDIO})
-    include(${MLRootDir}/MLAudio/MLAudio.cmake)
-endif ()
-
-if (${ML_ALL} OR ${ML_PROTOCOL})
-    include(${MLRootDir}/MLProtocol/MLProtocol.cmake)
-endif ()
-
-if (${ML_ALL} OR ${ML_STUDIO})
-    include(${MLRootDir}/MLStudio/MLStudio.cmake)
-endif ()
-
-if (${ML_ALL} OR ${ML_BOARD})
-    include(${MLRootDir}/MLBoard/MLBoard.cmake)
-endif ()
+ml_include_module(ML_STUDIO
+# Dependencies
+    ML_CORE ML_AUDIO ML_PROTOCOL
+)
