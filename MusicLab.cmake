@@ -67,7 +67,7 @@ ml_include_module(ML_AUDIO
 
 ml_include_module(ML_BOARD
 # Dependencies
-    ML_CORE
+    ML_CORE ML_PROTOCOL
 )
 
 ml_include_module(ML_STUDIO
