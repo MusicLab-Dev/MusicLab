@@ -16,3 +16,6 @@
 [submodule "MLModules"]
 	path = MLModules
 	url = git@github.com:MusicLab-Dev/MLModules.git
+[submodule "MLBoardServer"]
+	path = MLBoardServer
+	url = git@github.com:MusicLab-Dev/MLBoardServer.git

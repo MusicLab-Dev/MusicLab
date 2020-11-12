@@ -54,6 +54,7 @@ ml_setup_module(ML_CORE MLCore)
 ml_setup_module(ML_AUDIO MLAudio)
 ml_setup_module(ML_STUDIO MLStudio)
 ml_setup_module(ML_BOARD MLBoard)
+ml_setup_module(ML_BOARD_SERVER MLBoard)
 ml_setup_module(ML_PROTOCOL MLProtocol)
 
 ml_include_module(ML_CORE)
@@ -66,6 +67,11 @@ ml_include_module(ML_AUDIO
 )
 
 ml_include_module(ML_BOARD
+# Dependencies
+    ML_CORE ML_PROTOCOL
+)
+
+ml_include_module(ML_BOARD_SERVER
 # Dependencies
     ML_CORE ML_PROTOCOL
 )

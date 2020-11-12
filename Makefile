@@ -78,6 +78,25 @@ board_benchmarks:
 board_benchmarks_debug:
 	$(MAKE) debug CMAKE_ARGS+="-DML_BOARD=TRUE -DML_BENCHMARKS=TRUE"
 
+# Board Server
+board_server:
+	$(MAKE) release CMAKE_ARGS+=-DML_BOARD_SERVER=TRUE
+
+board_server_debug:
+	$(MAKE) debug CMAKE_ARGS+=-DML_BOARD_SERVER=TRUE
+
+board_server_tests:
+	$(MAKE) release CMAKE_ARGS+="-DML_BOARD_SERVER=TRUE -DML_TESTS=TRUE"
+
+board_server_tests_debug:
+	$(MAKE) debug CMAKE_ARGS+="-DML_BOARD_SERVER=TRUE -DML_TESTS=TRUE"
+
+board_server_benchmarks:
+	$(MAKE) release CMAKE_ARGS+="-DML_BOARD_SERVER=TRUE -DML_BENCHMARKS=TRUE"
+
+board_server_benchmarks_debug:
+	$(MAKE) debug CMAKE_ARGS+="-DML_BOARD_SERVER=TRUE -DML_BENCHMARKS=TRUE"
+
 # Core
 core:
 	$(MAKE) release CMAKE_ARGS+=-DML_CORE=TRUE
